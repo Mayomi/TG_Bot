@@ -63,9 +63,9 @@ class NFCommand extends UserCommand
     {
         $Country = $data["Country"];
         $Currency = $data["Currency"];
-        $Basic = str_replace(",","",$data["Basic"]);
-        $Standard = str_replace(",","",$data["Standard"]);
-        $Premium = str_replace(",","",$data["Premium"]);
+        $Basic = str_replace(",", "", $data["Basic"]);
+        $Standard = str_replace(",", "", $data["Standard"]);
+        $Premium = str_replace(",", "", $data["Premium"]);
 
         $rate = json_decode($this->getRates(), true);
         $val = $rate["rates"]["CNY"] / $rate["rates"]["$Currency"];
@@ -76,10 +76,10 @@ class NFCommand extends UserCommand
         try {
             return sprintf(
                 '***国家或地区名：%s' . PHP_EOL .
-                '使用货币：%s' . PHP_EOL .
-                '基本套餐：%s / %s 元' . PHP_EOL .
-                '标准套餐：%s / %s 元' . PHP_EOL .
-                '高级套餐：%s / %s 元***',
+                    '使用货币：%s' . PHP_EOL .
+                    '基本套餐：%s / %s 元' . PHP_EOL .
+                    '标准套餐：%s / %s 元' . PHP_EOL .
+                    '高级套餐：%s / %s 元***',
                 $Country,
                 $Currency,
                 $Basic,
@@ -111,9 +111,9 @@ class NFCommand extends UserCommand
         }
         $country_data = json_decode($this->getCountry($code), true);
         $text = "";
-        if ($country_data["result"]){
+        if ($country_data["result"]) {
             $netflix_data = json_decode($this->getNetflix($country_data["code"]), true);
-            if ($netflix_data["result"] and isset($netflix_data["Currency"])){
+            if ($netflix_data["result"] and isset($netflix_data["Currency"]) and isset($netflix_data["Premium"])) {
                 $text = $this->getString($netflix_data);
             } else {
                 return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
