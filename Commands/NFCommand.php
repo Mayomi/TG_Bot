@@ -75,11 +75,11 @@ class NFCommand extends UserCommand
 
         try {
             return sprintf(
-                '***国家或地区名：%s' . PHP_EOL .
+                '`国家或地区名：%s' . PHP_EOL .
                     '使用货币：%s' . PHP_EOL .
                     '基本套餐：%s / %s 元' . PHP_EOL .
                     '标准套餐：%s / %s 元' . PHP_EOL .
-                    '高级套餐：%s / %s 元***',
+                    '高级套餐：%s / %s 元`',
                 $Country,
                 $Currency,
                 $Basic,
@@ -105,7 +105,7 @@ class NFCommand extends UserCommand
         $code = strtoupper($code);
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($code === '') {
-            return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+            return $this->replyToChat('`代码解析错误` ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
@@ -116,12 +116,12 @@ class NFCommand extends UserCommand
             if ($netflix_data["result"] and isset($netflix_data["Currency"]) and isset($netflix_data["Premium"])) {
                 $text = $this->getString($netflix_data);
             } else {
-                return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+                return $this->replyToChat('`代码解析错误` ' . $this->getUsage(), [
                     'parse_mode' => 'markdown',
                 ]);
             }
         } else {
-            return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+            return $this->replyToChat('`代码解析错误` ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
