@@ -33,16 +33,16 @@ class BinCommand extends UserCommand
     {
         try {
             if (!(isset($data['result'])) || $data['result'] == false) {
-                return '`卡头解析错误`';
+                return '*卡头解析错误*';
             }
 
             return sprintf(
-                '`卡头: %s' . PHP_EOL .
+                '*卡头: %s' . PHP_EOL .
                     '种类: %s' . PHP_EOL .
                     '级别: %s' . PHP_EOL .
                     '银行: %s' . PHP_EOL .
                     '国家: %s%s' . PHP_EOL .
-                    '类型: %s`',
+                    '类型: %s*',
                 $data['data']['bin'],
                 $data['data']['vendor'],
                 $data['data']['level'],
@@ -54,7 +54,7 @@ class BinCommand extends UserCommand
         } catch (TelegramException $e) {
             TelegramLog::error($e->getMessage());
 
-            return '`卡头解析错误`';
+            return '*卡头解析错误*';
         }
     }
     public function execute(): ServerResponse
@@ -66,7 +66,7 @@ class BinCommand extends UserCommand
         $bin = trim($this->getMessage()->getText(true));
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($bin === '') {
-            return $this->replyToChat('`卡头解析错误` ' . $this->getUsage(), [
+            return $this->replyToChat('*卡头解析错误* ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
