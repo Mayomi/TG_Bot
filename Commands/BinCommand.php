@@ -16,10 +16,11 @@ class BinCommand extends UserCommand
     protected $description = '获取指定卡头的卡信息';
     protected $usage = '指令格式：/bin 6-8位卡头';
     protected $version = '1.0.0';
+    private $api_base_url = 'https://binsu-api.vercel.app/api/';
 
     private function getData($bin): string
     {
-        $client = new Client(['base_uri' => $this->getConfig('bin_api_url')]);
+        $client = new Client(['base_uri' => $this->api_base_url]);
         try {
             $response = $client->get($bin);
         } catch (RequestException $e) {

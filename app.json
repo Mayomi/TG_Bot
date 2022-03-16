@@ -1,0 +1,31 @@
+{
+    "name": "TG Bot",
+    "description": "No spec.",
+    "keywords": [
+        "Bot"
+    ],
+    "website": "https://dy.ax",
+    "repository": "https://github.com/Mayomi/TG_Bot",
+    "success_url": "/",
+    "env": {
+        "API_KEY": {
+            "description": "申请的BOT API TOKEN"
+        },
+        "USERNAME": {
+            "description": "申请的BOT username 不带@"
+        },
+        "WEB_HOOK": {
+            "description": "网站的hook.php路径"
+        },
+        "DY_API_URL": {
+            "description": "Dy的API路径"
+        }
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "image": "heroku/php"
+}

@@ -1,21 +1,10 @@
 {
-    "name": "telegram-bot/example-bot",
+    "name": "mayomi/tg-bot",
     "type": "project",
-    "description": "PHP Telegram Bot Example",
-    "keywords": ["telegram", "bot", "example"],
+    "description": "PHP Telegram Bot",
+    "version": "1.0.0",
     "license": "MIT",
-    "homepage": "https://github.com/php-telegram-bot/example-bot",
-    "support": {
-        "issues": "https://github.com/php-telegram-bot/example-bot/issues",
-        "source": "https://github.com/php-telegram-bot/example-bot"
-    },
-    "authors": [
-        {
-            "name": "PHP Telegram Bot Team",
-            "homepage": "https://github.com/php-telegram-bot/example-bot/graphs/contributors",
-            "role": "Developer"
-        }
-    ],
+    "homepage": "https://github.com/Mayomi/TG_Bot",
     "require": {
         "longman/telegram-bot": "*"
     },
