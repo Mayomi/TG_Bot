@@ -55,10 +55,10 @@ try {
     // $telegram->setDownloadPath($config['paths']['download']);
     // $telegram->setUploadPath($config['paths']['upload']);
 
-    // Load all command-specific configurations
-    // foreach ($config['commands']['configs'] as $command_name => $command_config) {
-    //     $telegram->setCommandConfig($command_name, $command_config);
-    // }
+    //Load all command-specific configurations
+    foreach ($config['commands']['configs'] as $command_name => $command_config) {
+        $telegram->setCommandConfig($command_name, $command_config);
+    }
 
     // Requests Limiter (tries to prevent reaching Telegram API limits)
     $telegram->enableLimiter($config['limiter']);
@@ -71,8 +71,8 @@ try {
     Longman\TelegramBot\TelegramLog::error($e);
 
     // Uncomment this to output any errors (ONLY FOR DEVELOPMENT!)
-    // echo $e;
+    echo $e;
 } catch (Longman\TelegramBot\Exception\TelegramLogException $e) {
     // Uncomment this to output log initialisation errors (ONLY FOR DEVELOPMENT!)
-    // echo $e;
+    echo $e;
 }
