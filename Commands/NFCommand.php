@@ -59,9 +59,8 @@ class NFCommand extends UserCommand
         }
         return (string) $response->getBody();
     }
-    private function getString(array $data): string
+    private function getString(array $data, string $name, string $emoji): string
     {
-        $Country = $data["Country"];
         $Currency = $data["Currency"];
         $Basic = str_replace(",", "", $data["Basic"]);
         $Standard = str_replace(",", "", $data["Standard"]);
@@ -75,12 +74,13 @@ class NFCommand extends UserCommand
 
         try {
             return sprintf(
-                '*国家或地区名：%s' . PHP_EOL .
+                '*国家或地区名：%s%s' . PHP_EOL .
                     '使用货币：%s' . PHP_EOL .
                     '基本套餐：%s / %s 元' . PHP_EOL .
                     '标准套餐：%s / %s 元' . PHP_EOL .
                     '高级套餐：%s / %s 元*',
-                $Country,
+                $name,
+                $emoji,
                 $Currency,
                 $Basic,
                 $Basic_CNY,
@@ -114,7 +114,7 @@ class NFCommand extends UserCommand
         if ($country_data["result"]) {
             $netflix_data = json_decode($this->getNetflix($country_data["code"]), true);
             if ($netflix_data["result"] and isset($netflix_data["Currency"]) and isset($netflix_data["Premium"])) {
-                $text = $this->getString($netflix_data);
+                $text = $this->getString($netflix_data, $country_data["name"], $country_data["emoji"]);
             } else {
                 return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
                     'parse_mode' => 'markdown',

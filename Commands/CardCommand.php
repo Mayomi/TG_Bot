@@ -80,7 +80,7 @@ class CardCommand extends UserCommand
             ]);
         }
 
-        return $this->replyToChat('*帮你找到了这些购买 ' . $name . ' 礼品卡的方法：*
+        return $this->replyToChat('*帮你找到了这些购买土耳其 ' . $name . ' 礼品卡的方法：*
 查询人 @' . $username, [
             'reply_markup' => $this->getKeyboard($name),
             'parse_mode' => 'markdown',
