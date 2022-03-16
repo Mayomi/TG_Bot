@@ -113,7 +113,7 @@ class NFCommand extends UserCommand
         $text = "";
         if ($country_data["result"]){
             $netflix_data = json_decode($this->getNetflix($country_data["code"]), true);
-            if ($netflix_data["result"]){
+            if ($netflix_data["result"] and isset($netflix_data["Currency"])){
                 $text = $this->getString($netflix_data);
             } else {
                 return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [

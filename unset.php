@@ -26,7 +26,7 @@ try {
     $telegram = new Longman\TelegramBot\Telegram($config['api_key'], $config['bot_username']);
 
     // Unset / delete the webhook
-    $result = $telegram->deleteWebhook();
+    $result = $telegram->deleteWebhook(['drop_pending_updates' => true]);
 
     echo $result->getDescription();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
