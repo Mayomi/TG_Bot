@@ -25,15 +25,15 @@
 
 return [
     // Add you bot's API key and name
-    'api_key'      => '5256018918:AAFuyzj0W9dilLMEoH5wklMsEXbEowemBwA',
-    'bot_username' => 'dyshit_bot', // Without "@"
+    'api_key'      => $_ENV['API_KEY'],
+    'bot_username' => $_ENV['USERNAME'], // Without "@"
 
     // [Manager Only] Secret key required to access the webhook
     'secret'       => 'super_secret',
 
     // When using the getUpdates method, this can be commented out
     'webhook'      => [
-        'url' => 'https://bot.dy.ax/example-bot/hook.php',
+        'url' => $_ENV['WEB_HOOK'],
         // Use self-signed certificate
         // 'certificate'     => __DIR__ . '/path/to/your/certificate.crt',
         // Limit maximum number of connections
@@ -49,9 +49,8 @@ return [
         // Here you can set any command-specific parameters
         'configs' => [
             // - Google geocode/timezone API key for /date command (see DateCommand.php)
-            'bin'   => ['bin_api_url'   =>  'https://binsu-api.vercel.app/api/'],
-            'rate'  => ['dy_api_url'    =>  'https://bot.dy.ax/'],
-            'nf'    => ['dy_api_url'    =>  'https://bot.dy.ax/'],
+            'rate'  => ['dy_api_url'    =>  $_ENV['DY_API_URL']],
+            'nf'    => ['dy_api_url'    =>  $_ENV['DY_API_URL']],
             // - OpenWeatherMap.org API key for /weather command (see WeatherCommand.php)
             // 'weather' => ['owm_api_key' => 'your_owm_api_key_here'],
             // - Payment Provider Token for /payment command (see Payments/PaymentCommand.php)
