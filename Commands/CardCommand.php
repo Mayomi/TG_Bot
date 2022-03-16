@@ -21,21 +21,27 @@ class CardCommand extends UserCommand
                 $inline_keyboard = new InlineKeyboard([
                     ['text' => 'TurGame', 'url' => 'https://www.turgame.com/netflix-gift-card/'],
                     ['text' => 'MTCGame', 'url' => 'https://www.mtcgame.com/en-UG/netflix/netflix-hediye-karti'],
+                ],[
                     ['text' => 'trendyol', 'url' => 'https://www.trendyol.com/sr?q=netfl%C4%B1x'],
+                    ['text' => 'oyunfor', 'url' => 'https://www.oyunfor.com/tv/netflix-hediye-kodu-karti'],
                 ]);
                 break;
             case 'Apple':
                 $inline_keyboard = new InlineKeyboard([
                     ['text' => 'TurGame', 'url' => 'https://www.turgame.com/app-store-itunes-gift-card/'],
                     ['text' => 'MTCGame', 'url' => 'https://www.mtcgame.com/en-UG/apple-store/itunes-hediye-karti'],
+                ],[
                     ['text' => 'Epin', 'url' => 'https://www.epin.com.tr/appstore-itunes-bakiye'],
+                    ['text' => 'oyunfor', 'url' => 'https://www.oyunfor.com/apple-store/apple-store-itunes-gift-card'],
                 ]);
                 break;
             case 'Google Play':
                 $inline_keyboard = new InlineKeyboard([
                     ['text' => 'TurGame', 'url' => 'https://www.turgame.com/google-play-gift-card/'],
                     ['text' => 'MTCGame', 'url' => 'https://www.mtcgame.com/en-UG/google-play/google-play-bakiye-kodlari'],
+                ],[
                     ['text' => 'Epin', 'url' => 'https://www.epin.com.tr/google-play-bakiyesi'],
+                    ['text' => 'oyunfor', 'url' => 'https://www.oyunfor.com/google-play/tl-android-bakiye'],
                 ]);
                 break;
         }
