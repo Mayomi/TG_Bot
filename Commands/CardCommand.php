@@ -27,17 +27,31 @@ class CardCommand extends UserCommand
                 'parse_mode' => 'markdown',
             ]);
         }
-        $text = '';
+        switch ($code) {
+            case 'nf':
+                $name = 'Netflix';
+                break;
+            case 'ap':
+                $name = 'Apple';
+                break;
+            case 'gp':
+                $name = 'Google Play';
+                break;
+        }
         $inline_keyboard = new InlineKeyboard([
-            ['text' => 'Inline Query (current chat)', 'switch_inline_query_current_chat' => 'inline query...'],
-            ['text' => 'Inline Query (other chat)', 'switch_inline_query' => 'inline query...'],
+            ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
+            ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
+            ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
         ], [
-            ['text' => 'Callback', 'callback_data' => 'identifier'],
+            ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
+            ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
             ['text' => 'Open URL', 'url' => 'https://github.com/php-telegram-bot/example-bot'],
         ]);
 
-        return $this->replyToChat('Inline Keyboard', [
+        return $this->replyToChat('***帮你找到了这些购买' . $name . '礼品卡的方法：***
+查询人 @', [
             'reply_markup' => $inline_keyboard,
+            'parse_mode' => 'markdown',
         ]);
     }
 }
