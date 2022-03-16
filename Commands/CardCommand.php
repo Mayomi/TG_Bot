@@ -11,7 +11,7 @@ class CardCommand extends UserCommand
 {
     protected $name = 'card';
     protected $description = '获取指定土耳其礼品卡的购买方式';
-    protected $usage = '指令格式：/card nf/ap/gp';
+    protected $usage = '指令格式：/card netflix/apple/google';
     protected $version = '1.0.0';
 
     private function getKeyboard($name): string
@@ -62,13 +62,13 @@ class CardCommand extends UserCommand
             ]);
         }
         switch ($code) {
-            case 'nf':
+            case 'netflix':
                 $name = 'Netflix';
                 break;
-            case 'ap':
+            case 'apple':
                 $name = 'Apple';
                 break;
-            case 'gp':
+            case 'google':
                 $name = 'Google Play';
                 break;
             default:
