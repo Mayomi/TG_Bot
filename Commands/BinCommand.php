@@ -16,7 +16,7 @@ class BinCommand extends UserCommand
     protected $description = '获取指定卡头的卡信息';
     protected $usage = '指令格式：/bin 6-8位卡头';
     protected $version = '1.0.0';
-    private $api_base_url = 'https://binsu-api.vercel.app/api/';
+    private $api_base_url = 'https://lookup.binlist.net/';
 
     private function getData($bin): string
     {
@@ -29,13 +29,9 @@ class BinCommand extends UserCommand
         }
         return (string) $response->getBody();
     }
-    private function getString(array $data): string
+    private function getString(array $data, string $bin): string
     {
         try {
-            if (!(isset($data['result'])) || $data['result'] == false) {
-                return '*卡头解析错误*';
-            }
-
             return sprintf(
                 '*卡头: %s' . PHP_EOL .
                     '种类: %s' . PHP_EOL .
@@ -43,13 +39,13 @@ class BinCommand extends UserCommand
                     '银行: %s' . PHP_EOL .
                     '国家: %s%s' . PHP_EOL .
                     '类型: %s*',
-                $data['data']['bin'],
-                $data['data']['vendor'],
-                $data['data']['level'],
-                $data['data']['bank'],
-                $data['data']['country'],
-                $data['data']['countryInfo']['emoji'],
-                $data['data']['type']
+                $bin,
+                $data['scheme'],
+                $data['brand'],
+                $data['bank'],
+                $data['country']['name'],
+                $data['country']['emoji'],
+                $data['type']
             );
         } catch (TelegramException $e) {
             TelegramLog::error($e->getMessage());
@@ -71,7 +67,7 @@ class BinCommand extends UserCommand
             ]);
         }
         if ($bin_data = json_decode($this->getData($bin), true)) {
-            $text = $this->getString($bin_data);
+            $text = $this->getString($bin_data, $bin);
         }
         return $this->replyToChat($text . '
 查询人 @' . $username, [
