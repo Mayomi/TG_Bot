@@ -105,7 +105,9 @@ class NFCommand extends UserCommand
         $code = strtoupper($code);
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($code === '') {
-            return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+            return Request::sendMessage([
+                'chat_id'    => $this->getMessage()->getFrom()->getId(),
+                'text' => '*解析错误* '.$this->getUsage(),
                 'parse_mode' => 'markdown',
             ]);
         }
@@ -116,17 +118,22 @@ class NFCommand extends UserCommand
             if ($netflix_data["result"] and isset($netflix_data["Currency"]) and isset($netflix_data["Premium"])) {
                 $text = $this->getString($netflix_data, $country_data["name"], $country_data["emoji"]);
             } else {
-                return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+                return Request::sendMessage([
+                    'chat_id'    => $this->getMessage()->getFrom()->getId(),
+                    'text' => '*解析错误* '.$this->getUsage(),
                     'parse_mode' => 'markdown',
                 ]);
             }
         } else {
-            return $this->replyToChat('*代码解析错误* ' . $this->getUsage(), [
+            return Request::sendMessage([
+                'chat_id'    => $this->getMessage()->getFrom()->getId(),
+                'text' => '*解析错误* '.$this->getUsage(),
                 'parse_mode' => 'markdown',
             ]);
         }
-        return $this->replyToChat($text . '
-查询人 @' . $username, [
+        return Request::sendMessage([
+            'chat_id'    => $this->getMessage()->getFrom()->getId(),
+            'text' => $text,
             'parse_mode' => 'markdown',
         ]);
     }
