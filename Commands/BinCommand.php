@@ -42,7 +42,7 @@ class BinCommand extends UserCommand
                 $bin,
                 $data['scheme'],
                 $data['brand'],
-                $data['bank'],
+                $data['bank']['name'],
                 $data['country']['name'],
                 $data['country']['emoji'],
                 $data['type']
