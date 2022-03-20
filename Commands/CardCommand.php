@@ -59,9 +59,7 @@ class CardCommand extends UserCommand
         $code = strtolower($code);
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($code === '') {
-            return Request::sendMessage([
-                'chat_id'    => $this->getMessage()->getFrom()->getId(),
-                'text' => '*解析错误* '.$this->getUsage(),
+            return $this->replyToChat('*解析错误* ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
@@ -79,16 +77,13 @@ class CardCommand extends UserCommand
                 $name = '';
         }
         if ($name === '') {
-            return Request::sendMessage([
-                'chat_id'    => $this->getMessage()->getFrom()->getId(),
-                'text' => '*解析错误* '.$this->getUsage(),
+            return $this->replyToChat('*解析错误* ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
 
-        return Request::sendMessage([
-            'chat_id'    => $this->getMessage()->getFrom()->getId(),
-            'text' => '*帮你找到了这些购买土耳其 ' . $name . ' 礼品卡的方法：*',
+        return $this->replyToChat('*帮你找到了这些购买土耳其 ' . $name . ' 礼品卡的方法：*
+查询人 @' . $username, [
             'reply_markup' => $this->getKeyboard($name),
             'parse_mode' => 'markdown',
         ]);

@@ -43,7 +43,7 @@ class RateCommand extends UserCommand
         $val = $data["rates"]["$to_Currency"] / $data["rates"]["$from_Currency"];
         $total = round($val * $amount, 4);
         if (!(isset($data['success'])) || $data['success'] == false) {
-            return '*汇率解析错误*';
+            return '*解析错误*';
         }
 
         try {
@@ -70,9 +70,7 @@ class RateCommand extends UserCommand
         $to_Currency = strtoupper(substr($this->getMessage()->getText(true), 4, 3));
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($from_Currency === '' or $to_Currency === '') {
-            return Request::sendMessage([
-                'chat_id'    => $this->getMessage()->getFrom()->getId(),
-                'text' => '*解析错误* '.$this->getUsage(),
+            return $this->replyToChat('*解析错误* ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
@@ -88,15 +86,12 @@ class RateCommand extends UserCommand
         if ($form_result and $to_result) {
             $text = $this->getString($data, $from_Currency, $to_Currency, $amount);
         } else {
-            return Request::sendMessage([
-                'chat_id'    => $this->getMessage()->getFrom()->getId(),
-                'text' => '*解析错误* '.$this->getUsage(),
+            return $this->replyToChat('*解析错误* '.$this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
-        return Request::sendMessage([
-            'chat_id'    => $this->getMessage()->getFrom()->getId(),
-            'text' => $text,
+        return $this->replyToChat($text . '
+查询人 @' . $username, [
             'parse_mode' => 'markdown',
         ]);
     }

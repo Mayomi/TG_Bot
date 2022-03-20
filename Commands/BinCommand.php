@@ -50,7 +50,7 @@ class BinCommand extends UserCommand
         } catch (TelegramException $e) {
             TelegramLog::error($e->getMessage());
 
-            return '*卡头解析错误*';
+            return '';
         }
     }
     public function execute(): ServerResponse
@@ -62,18 +62,15 @@ class BinCommand extends UserCommand
         $bin = trim($this->getMessage()->getText(true));
         $username = $this->getMessage()->getFrom()->getUsername();
         if ($bin === '') {
-            return Request::sendMessage([
-                'chat_id'    => $this->getMessage()->getFrom()->getId(),
-                'text' => '*解析错误* '.$this->getUsage(),
+            return $this->replyToChat('*解析错误* ' . $this->getUsage(), [
                 'parse_mode' => 'markdown',
             ]);
         }
         if ($bin_data = json_decode($this->getData($bin), true)) {
             $text = $this->getString($bin_data, $bin);
         }
-        return Request::sendMessage([
-            'chat_id'    => $this->getMessage()->getFrom()->getId(),
-            'text' => $text,
+        return $this->replyToChat($text . '
+查询人 @' . $username, [
             'parse_mode' => 'markdown',
         ]);
     }
