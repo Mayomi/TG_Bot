@@ -90,8 +90,10 @@ class RateCommand extends UserCommand
                 'parse_mode' => 'markdown',
             ]);
         }
-        return $this->replyToChat($text . '
-查询人 @' . $username, [
+        return Request::sendMessage([
+            'chat_id'    => $this->getMessage()->getFrom()->getId(),
+            'text' => $text . '
+查询人 @' . $username,
             'parse_mode' => 'markdown',
         ]);
     }
