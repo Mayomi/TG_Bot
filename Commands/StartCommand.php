@@ -25,6 +25,7 @@ namespace Longman\TelegramBot\Commands\SystemCommands;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
+use Longman\TelegramBot\Request;
 
 class StartCommand extends SystemCommand
 {
@@ -61,6 +62,10 @@ class StartCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
+        Request::deleteMessage([
+            'chat_id'    => $this->getMessage()->getChat()->getId(),
+            'message_id' => $this->getMessage()->getMessageId(),
+        ]);
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
 

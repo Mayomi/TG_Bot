@@ -22,6 +22,7 @@ use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
+use Longman\TelegramBot\Request;
 
 class HelpCommand extends UserCommand
 {
@@ -33,12 +34,12 @@ class HelpCommand extends UserCommand
     /**
      * @var string
      */
-    protected $description = 'Show bot commands help';
+    protected $description = '显示机器人帮助';
 
     /**
      * @var string
      */
-    protected $usage = '/help or /help <command>';
+    protected $usage = '/help or /help <指令>';
 
     /**
      * @var string
@@ -58,6 +59,11 @@ class HelpCommand extends UserCommand
      */
     public function execute(): ServerResponse
     {
+        Request::deleteMessage([
+            'chat_id'    => $this->getMessage()->getChat()->getId(),
+            'message_id' => $this->getMessage()->getMessageId(),
+        ]);
+        
         $message     = $this->getMessage();
         $command_str = trim($message->getText(true));
 
@@ -80,7 +86,7 @@ class HelpCommand extends UserCommand
                 }
             }
 
-            $text .= PHP_EOL . 'For exact command help type: /help <command>';
+            $text .= PHP_EOL . '获取详细帮助，请输入指令: /help <指令>';
 
             return $this->replyToChat($text, ['parse_mode' => 'markdown']);
         }
@@ -90,9 +96,9 @@ class HelpCommand extends UserCommand
             $command = $all_commands[$command_str];
 
             return $this->replyToChat(sprintf(
-                'Command: %s (v%s)' . PHP_EOL .
-                'Description: %s' . PHP_EOL .
-                'Usage: %s',
+                '指令: %s (v%s)' . PHP_EOL .
+                '描述: %s' . PHP_EOL .
+                '用法: %s',
                 $command->getName(),
                 $command->getVersion(),
                 $command->getDescription(),
@@ -100,7 +106,7 @@ class HelpCommand extends UserCommand
             ), ['parse_mode' => 'markdown']);
         }
 
-        return $this->replyToChat('No help available: Command `/' . $command_str . '` not found', ['parse_mode' => 'markdown']);
+        return $this->replyToChat('没有可用的帮助: 指令 `/' . $command_str . '` 未找到', ['parse_mode' => 'markdown']);
     }
 
     /**
