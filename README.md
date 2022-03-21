@@ -1,4 +1,4 @@
-# PHP Telegram Bot Example
+# PHP Telegram Bot
 
 > :construction: Work In Progress :construction:
 
